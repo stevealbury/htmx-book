@@ -1,7 +1,13 @@
 # Importing flask module in the project is mandatory
 # An object of Flask class is our WSGI application.
 from flask import Flask,  redirect, render_template, request, jsonify, flash, send_file
+from contacts_model import Contact, Archiver
+import time
+import htmx
 
+
+#load dummy database
+Contact.load_db()
 
 # Flask constructor takes the name of 
 # current module (__name__) as argument.
@@ -20,7 +26,7 @@ def index():
 def contacts():
     search = request.args.get("q")
 
-    if search is NOT None:
+    if search is not None:
         contacts_set = Contact.search(search)
     else:
         contacts_set = Contact.all(search)
